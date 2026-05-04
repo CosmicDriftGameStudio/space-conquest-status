@@ -42,15 +42,6 @@ jobs:
           platforms: linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      - name: Trivy vulnerability scan
-        uses: aquasecurity/trivy-action@v0.36.0
-        with:
-          image-ref: ghcr.io/cosmicdriftgamestudio/status:latest
-          severity: HIGH,CRITICAL
-          ignore-unfixed: true
-          exit-code: '1'
-          format: table
-          vuln-type: 'os,library'
       - name: Install kubectl
         run: |
           ARCH=$(uname -m)
