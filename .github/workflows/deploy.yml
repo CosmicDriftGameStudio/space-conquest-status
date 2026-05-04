@@ -45,7 +45,7 @@ jobs:
       - name: Trivy vulnerability scan
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          image-ref: ghcr.io/cosmicdriftgamestudio/status:sha-${{ github.sha }}
+          image-ref: ghcr.io/cosmicdriftgamestudio/status:latest
           severity: HIGH,CRITICAL
           ignore-unfixed: true
           exit-code: '1'
