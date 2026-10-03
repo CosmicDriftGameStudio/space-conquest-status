@@ -16,7 +16,7 @@ env:
 
 jobs:
   build:
-    runs-on: cdgs-runner
+    runs-on: cdgs-all-normal
     permissions:
       contents: read
       packages: write
