@@ -7,6 +7,7 @@ on:
     branches: [main]
     paths:
       - "index.html"
+      - "nginx.conf"
       - "Dockerfile"
       - ".github/workflows/deploy.yml"
   workflow_dispatch:
@@ -67,8 +68,8 @@ jobs:
           printf '%s\n' "$KUBECONFIG_DEPLOY" > /tmp/kubeconfig
           chmod 600 /tmp/kubeconfig
           BUILD_TIME=$(date -u +%Y-%m-%dT%H:%M:%SZ)
-          kubectl --kubeconfig=/tmp/kubeconfig -n status \
-            patch deployment status --type=strategic \
+          kubectl --kubeconfig=/tmp/kubeconfig -n space-conquest-status \
+            patch deployment space-conquest-status --type=strategic \
             -p "{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"kumiko.io/git-sha\":\"$SHA\",\"kumiko.io/build-time\":\"$BUILD_TIME\"}}}}}"
-          kubectl --kubeconfig=/tmp/kubeconfig -n status \
-            rollout status deployment status --timeout=180s
+          kubectl --kubeconfig=/tmp/kubeconfig -n space-conquest-status \
+            rollout status deployment space-conquest-status --timeout=180s
